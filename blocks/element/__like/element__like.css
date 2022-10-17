@@ -3,3 +3,7 @@
 	height: 19px;
 	background-image: url(../../../images/like.svg);
 }
+
+.element__like:hover {
+	opacity: .6;
+}
