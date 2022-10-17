@@ -1,0 +1,4 @@
+.element__content {
+	height: calc(361px - 282px);
+	background-color: white;
+}
