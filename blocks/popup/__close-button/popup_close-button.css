@@ -5,6 +5,7 @@
 	top: -40px;
 	left: 438px;
 	background-image: url(../../../images/Close\ Icon.svg);
+	background-size: contain;
 }
 
 .popup__close-button:hover {
