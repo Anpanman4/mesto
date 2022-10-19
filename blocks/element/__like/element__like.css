@@ -2,8 +2,9 @@
 	width: 22px;
 	height: 19px;
 	background-image: url(../../../images/like.svg);
+	cursor: pointer
 }
 
 .element__like:hover {
-	opacity: .6;
+	opacity: .5;
 }
