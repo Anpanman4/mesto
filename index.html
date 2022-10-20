@@ -16,69 +16,57 @@
 		<section class="profile">
 			<div class="profile__container">
 				<img class="profile__avatar" src="./images/Avatar.png" alt="Аватарка">
-				<address class="profile__info">
-					<p class="profile__name">Жак-Ив Кусто</p>
-					<button class="profile__edit-button"></button>
+				<div class="profile__info">
+					<h1 class="profile__name">Жак-Ив Кусто</h1>
+					<button class="profile__edit-button" type="button" aria-label="Редактирование"></button>
 					<p class="profile__job">Исследователь океана</p>
-				</address>
+				</div>
 			</div>
-			<button class="profile__add-button"></button>
+			<button class="profile__add-button" type="button" aria-label="Добавить карточку"></button>
 		</section>
 
 		<section>
 			<ul class="elements">
 				<li class="element">
-					<img class="element__image" src="./images/element/1.png" alt="Карачаево">
-					<div class="element__content">
-						<div class="element__container">
-							<p class="element__place">Карачаевск-далеко</p>
-							<div class="element__like"></div>
-						</div>
+					<img class="element__image" src="./images/element/1.jpg" alt="Карачаево">
+					<div class="element__container">
+						<h2 class="element__place">Карачаевск-далеко</h2>
+						<button class="element__like" type="button" aria-label="Нравится"></button>
 					</div>
 				</li>
 				<li class="element">
-					<img class="element__image" src="./images/element/2.png" alt="Гора Эльбрус">
-					<div class="element__content">
-						<div class="element__container">
-							<p class="element__place">Гора Эльбрус</p>
-							<div class="element__like"></div>
-						</div>
+					<img class="element__image" src="./images/element/2.jpg" alt="Гора Эльбрус">
+					<div class="element__container">
+						<h2 class="element__place">Гора Эльбрус</h2>
+						<button class="element__like" type="button" aria-label="Нравится"></button>
 					</div>
 				</li>
 				<li class="element">
-					<img class="element__image" src="./images/element/3.png" alt="Домбай">
-					<div class="element__content">
-						<div class="element__container">
-							<p class="element__place">Домбай</p>
-							<div class="element__like"></div>
-						</div>
+					<img class="element__image" src="./images/element/3.jpg" alt="Домбай">
+					<div class="element__container">
+						<h2 class="element__place">Домбай</h2>
+						<button class="element__like" type="button" aria-label="Нравится"></button>
 					</div>
 				</li>
 				<li class="element">
-					<img class="element__image" src="./images/element/1.png" alt="Карачаево">
-					<div class="element__content">
-						<div class="element__container">
-							<p class="element__place">Карачаево</p>
-							<div class="element__like"></div>
-						</div>
+					<img class="element__image" src="./images/element/1.jpg" alt="Карачаево">
+					<div class="element__container">
+						<h2 class="element__place">Карачаево</h2>
+						<button class="element__like" type="button" aria-label="Нравится"></button>
 					</div>
 				</li>
 				<li class="element">
-					<img class="element__image" src="./images/element/2.png" alt="Гора Эльбрус">
-					<div class="element__content">
-						<div class="element__container">
-							<p class="element__place">Гора Эльбрус-высокоё</p>
-							<div class="element__like"></div>
-						</div>
+					<img class="element__image" src="./images/element/2.jpg" alt="Гора Эльбрус">
+					<div class="element__container">
+						<h2 class="element__place">Гора Эльбрус-высокоё</h2>
+						<button class="element__like" type="button" aria-label="Нравится"></button>
 					</div>
 				</li>
 				<li class="element">
-					<img class="element__image" src="./images/element/3.png" alt="Домбай">
-					<div class="element__content">
-						<div class="element__container">
-							<p class="element__place">Домбай</p>
-							<div class="element__like"></div>
-						</div>
+					<img class="element__image" src="./images/element/3.jpg" alt="Домбай">
+					<div class="element__container">
+						<h2 class="element__place">Домбай</h2>
+						<button class="element__like" type="button" aria-label="Нравится"></button>
 					</div>
 				</li>
 			</ul>
@@ -89,15 +77,17 @@
 		<p class="footer__copyright">&copy; 2022 Кондратьев Алексей</p>
 	</footer>
 
-	<section class="popup">
+	<div class="popup">
 		<div class="popup__container">
-			<div class="popup__close-button"></div>
+			<button class="popup__close-button" type="button" aria-label="Закрыть"></button>
 			<h2 class="popup__title">Редактировать профиль</h2>
-			<input class="popup__field-name" type="text" placeholder="Ваше имя" value="">
-			<input class="popup__field-job" type="text" placeholder="Чем занимаетесь" value="">
-			<button class="popup__save-button">Сохранить</button>
+			<form class="popup__form">
+				<input class="popup__field popup__field_type_name" type="text" name="name" placeholder="Ваше имя" value="">
+				<input class="popup__field popup__field_type_job" type="text" name="job" placeholder="Чем занимаетесь" value="">
+				<button class="popup__save-button" type="submit">Сохранить</button>
+			</form>
 		</div>
-	</section>
+	</div>
 
 	<script src="./scripts/index.js"></script>
 </body>
