@@ -3,6 +3,7 @@
 	height: 24px;
 	background: no-repeat center;
 	background-image: url(../../../images/Edit-Button.svg);
+	background-size: 7.5px;
 	border: 1px solid white;
 	margin-top: 15px;
 	padding: 0;
@@ -13,8 +14,12 @@
 	cursor: pointer;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 500px) {
 	.profile__edit-button {
-		margin-top: 3px;
+		width: 18px;
+		height: 18px;
+		background-image: url(../../../images/Edit-Button-small.svg);
+		margin-top: 8px;
 	}
 }
+

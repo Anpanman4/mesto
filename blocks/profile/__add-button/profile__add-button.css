@@ -20,3 +20,8 @@
 	}
 }
 
+@media screen and (max-width: 500px) {
+	.profile__add-button {
+		background-image: url(../../../images/Add-Button-small.svg);
+	}
+}

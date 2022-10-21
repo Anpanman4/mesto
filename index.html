@@ -9,7 +9,6 @@
 <body class="page">
 	<header class="header">
 		<img class="header__logo" src="./images/logo.svg" alt="Место">
-		<div class="header__line"></div>
 	</header>
 
 	<main class="">
@@ -81,7 +80,7 @@
 		<div class="popup__container">
 			<button class="popup__close-button" type="button" aria-label="Закрыть"></button>
 			<h2 class="popup__title">Редактировать профиль</h2>
-			<form class="popup__form">
+			<form class="popup__form" method="post" name="personal-information">
 				<input class="popup__field popup__field_type_name" type="text" name="name" placeholder="Ваше имя" value="">
 				<input class="popup__field popup__field_type_job" type="text" name="job" placeholder="Чем занимаетесь" value="">
 				<button class="popup__save-button" type="submit">Сохранить</button>

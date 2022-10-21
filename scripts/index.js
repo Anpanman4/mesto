@@ -3,11 +3,15 @@ const popupEditButtonElement = profileElement.querySelector('.profile__edit-butt
 const popupElement = document.querySelector('.popup');
 const popupCloseButtonElement = popupElement.querySelector('.popup__close-button');
 const popupForm = popupElement.querySelector('.popup__form');
+let profileName = profileElement.querySelector('.profile__name');
+let profileJob = profileElement.querySelector('.profile__job');
+let popupFieldName = popupElement.querySelector('.popup__field_type_name');
+let popupFieldJob = popupElement.querySelector('.popup__field_type_job');
 
 // ф-я для открытия popup
 const addPopupVisibility = function() {
-	popupElement.querySelector('.popup__field_type_name').value = profileElement.querySelector('.profile__name').textContent;
-	popupElement.querySelector('.popup__field_type_job').value = profileElement.querySelector('.profile__job').textContent;
+	popupElement.querySelector('.popup__field_type_name').value = profileName.textContent;
+	popupElement.querySelector('.popup__field_type_job').value = profileJob.textContent;
 	popupElement.classList.add('popup_opened');
 }
 
@@ -19,8 +23,8 @@ const removePopupVisibility = function() {
 // ф-я для сохранения новых значений popup
 const savePopupValue = function(event) {
 	event.preventDefault()
-	profileElement.querySelector('.profile__name').textContent = popupElement.querySelector('.popup__field_type_name').value;
-	profileElement.querySelector('.profile__job').textContent = popupElement.querySelector('.popup__field_type_job').value;
+	profileElement.querySelector('.profile__name').textContent = popupFieldName.value;
+	profileElement.querySelector('.profile__job').textContent = popupFieldJob.value;
 	removePopupVisibility();
 }
 
