@@ -5,6 +5,7 @@
 	top: -40px;
 	left: 438px;
 	background-image: url(../../../images/Close-Icon.svg);
+	background-repeat: no-repeat;
 	background-size: contain;
 	border: 0;
 	background-color: transparent;

@@ -10,8 +10,8 @@ let popupFieldJob = popupElement.querySelector('.popup__field_type_job');
 
 // ф-я для открытия popup
 const addPopupVisibility = function() {
-	popupElement.querySelector('.popup__field_type_name').value = profileName.textContent;
-	popupElement.querySelector('.popup__field_type_job').value = profileJob.textContent;
+	popupFieldName.value = profileName.textContent;
+	popupFieldJob.value = profileJob.textContent;
 	popupElement.classList.add('popup_opened');
 }
 
@@ -23,8 +23,8 @@ const removePopupVisibility = function() {
 // ф-я для сохранения новых значений popup
 const savePopupValue = function(event) {
 	event.preventDefault()
-	profileElement.querySelector('.profile__name').textContent = popupFieldName.value;
-	profileElement.querySelector('.profile__job').textContent = popupFieldJob.value;
+	profileName.textContent = popupFieldName.value;
+	profileJob.textContent = popupFieldJob.value;
 	removePopupVisibility();
 }
 

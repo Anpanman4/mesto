@@ -2,5 +2,6 @@
 	width: 22px;
 	height: 19px;
 	background-image: url(../../../../images/like-active.svg);
+	background-repeat: no-repeat;
 	cursor: pointer;
 }
