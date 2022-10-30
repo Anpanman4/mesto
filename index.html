@@ -26,48 +26,16 @@
 
 		<section>
 			<ul class="elements">
-				<li class="element">
-					<img class="element__image" src="./images/element/1.jpg" alt="Карачаево">
-					<div class="element__container">
-						<h2 class="element__place">Карачаевск-далеко</h2>
-						<button class="element__like" type="button" aria-label="Нравится"></button>
-					</div>
-				</li>
-				<li class="element">
-					<img class="element__image" src="./images/element/2.jpg" alt="Гора Эльбрус">
-					<div class="element__container">
-						<h2 class="element__place">Гора Эльбрус</h2>
-						<button class="element__like" type="button" aria-label="Нравится"></button>
-					</div>
-				</li>
-				<li class="element">
-					<img class="element__image" src="./images/element/3.jpg" alt="Домбай">
-					<div class="element__container">
-						<h2 class="element__place">Домбай</h2>
-						<button class="element__like" type="button" aria-label="Нравится"></button>
-					</div>
-				</li>
-				<li class="element">
-					<img class="element__image" src="./images/element/1.jpg" alt="Карачаево">
-					<div class="element__container">
-						<h2 class="element__place">Карачаево</h2>
-						<button class="element__like" type="button" aria-label="Нравится"></button>
-					</div>
-				</li>
-				<li class="element">
-					<img class="element__image" src="./images/element/2.jpg" alt="Гора Эльбрус">
-					<div class="element__container">
-						<h2 class="element__place">Гора Эльбрус-высокоё</h2>
-						<button class="element__like" type="button" aria-label="Нравится"></button>
-					</div>
-				</li>
-				<li class="element">
-					<img class="element__image" src="./images/element/3.jpg" alt="Домбай">
-					<div class="element__container">
-						<h2 class="element__place">Домбай</h2>
-						<button class="element__like" type="button" aria-label="Нравится"></button>
-					</div>
-				</li>
+				<template id="element-template">
+					<li class="element">
+						<img class="element__trash" src="./images/Trash.svg" alt="удалить">
+						<img class="element__image" src="" alt="">
+						<div class="element__container">
+							<h2 class="element__place"></h2>
+							<button class="element__like" type="button" aria-label="Нравится"></button>
+						</div>
+					</li>
+				</template>
 			</ul>
 		</section>
 	</main>
@@ -76,15 +44,35 @@
 		<p class="footer__copyright">&copy; 2022 Кондратьев Алексей</p>
 	</footer>
 
-	<div class="popup">
+	<div class="popup popup_type_edit">
 		<div class="popup__container">
 			<button class="popup__close-button" type="button" aria-label="Закрыть"></button>
 			<h2 class="popup__title">Редактировать профиль</h2>
 			<form class="popup__form" method="post" name="personal-information">
-				<input class="popup__field popup__field_type_name" type="text" name="name" placeholder="Ваше имя" value="">
-				<input class="popup__field popup__field_type_job" type="text" name="job" placeholder="Чем занимаетесь" value="">
+				<input class="popup__field popup__field_type_name" type="text" name="name" placeholder="Ваше имя" value="" autocomplete="off">
+				<input class="popup__field popup__field_type_job" type="text" name="job" placeholder="Чем занимаетесь" value="" autocomplete="off">
 				<button class="popup__save-button" type="submit">Сохранить</button>
 			</form>
+		</div>
+	</div>
+
+	<div class="popup popup_type_add">
+		<div class="popup__container">
+			<button class="popup__close-button" type="button" aria-label="Закрыть"></button>
+			<h2 class="popup__title">Новое место</h2>
+			<form class="popup__form" method="post" name="new-card">
+				<input class="popup__field popup__field_type_name" type="text" name="name" placeholder="Название" value="" autocomplete="off">
+				<input class="popup__field popup__field_type_image" type="text" name="link" placeholder="Ссылка на картинку" value="" autocomplete="off">
+				<button class="popup__save-button" type="submit">Создать</button>
+			</form>
+		</div>
+	</div>
+
+	<div class="popup popup_type-image">
+		<div class="popup__image-container">
+			<button class="popup__close-button" type="button" aria-label="Закрыть"></button>
+			<img class="popup__image" src="" alt="">
+			<h2 class="popup__text"></h2>
 		</div>
 	</div>
 
