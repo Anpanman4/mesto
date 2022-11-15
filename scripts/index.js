@@ -72,17 +72,20 @@ const openEditModalWindow = function() {
 // ф-я для открытия popup
 const openModalWindow = function(item) {
 	item.classList.add('popup_opened');
-	document.addEventListener('keydown', (evt) => {
-		if (evt.key === "Escape") {
-			console.log('asd')
-			closeModalWindow(item);
-		}
-	})
+	document.addEventListener('keydown', closeModalWindowByEsc)
 }
 
 // ф-я для закрытия popup
 const closeModalWindow = function(item) {
 	item.classList.remove('popup_opened');
+	document.removeEventListener('keydown', closeModalWindowByEsc)
+}
+
+// ф-я для закрытия popup по нажатию на esc
+const closeModalWindowByEsc = function(evt) {
+	if (evt.key === "Escape") {
+		closeModalWindow(document.querySelector('.popup_opened'));
+	}
 }
 
 // ф-я для сохранения новых значений popup
