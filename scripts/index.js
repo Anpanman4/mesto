@@ -5,6 +5,7 @@ const popupEditButtonElement = profileElement.querySelector('.profile__edit-butt
 const profileAddButtonElement = profileElement.querySelector('.profile__add-button');
 
 const buttonCloseList = document.querySelectorAll('.popup__close-button');
+const allPopup= document.querySelectorAll('.popup');
 
 const popupEditElement = document.querySelector('.popup_type_edit');
 const popupEditCloseButtonElement = popupEditElement.querySelector('.popup__close-button');
@@ -48,7 +49,6 @@ const makeCard = function(card) {
 	})
 
 	return elementElement;
-	// elementContainer.prepend(elementElement);
 }
 
 // ф-я для добавления карточки
@@ -72,6 +72,12 @@ const openEditModalWindow = function() {
 // ф-я для открытия popup
 const openModalWindow = function(item) {
 	item.classList.add('popup_opened');
+	document.addEventListener('keydown', (evt) => {
+		if (evt.key === "Escape") {
+			console.log('asd')
+			closeModalWindow(item);
+		}
+	})
 }
 
 // ф-я для закрытия popup
@@ -118,6 +124,15 @@ profileAddButtonElement.addEventListener('click', () => {
 popupEditForm.addEventListener('submit', savePopupValue);
 
 popupAddForm.addEventListener('submit', addNewCard);
+
+// закрытие по нажатию на оверлей
+allPopup.forEach(popup => {
+	popup.addEventListener('click', (evt) => {
+		if (evt.target === evt.currentTarget) {
+			closeModalWindow(popup);
+		}
+	})
+})
 
 buttonCloseList.forEach(btn => {
 	const popup = btn.closest('.popup');
