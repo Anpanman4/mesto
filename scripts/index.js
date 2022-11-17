@@ -5,7 +5,7 @@ const popupEditButtonElement = profileElement.querySelector('.profile__edit-butt
 const profileAddButtonElement = profileElement.querySelector('.profile__add-button');
 
 const buttonCloseList = document.querySelectorAll('.popup__close-button');
-const allPopup= document.querySelectorAll('.popup');
+const allPopups = document.querySelectorAll('.popup');
 
 const popupEditElement = document.querySelector('.popup_type_edit');
 const popupEditCloseButtonElement = popupEditElement.querySelector('.popup__close-button');
@@ -18,11 +18,12 @@ const popupAddCloseButtonElement = popupAddElement.querySelector('.popup__close-
 const popupAddForm = popupAddElement.querySelector('.popup__form')
 const popupAddFieldName = popupAddElement.querySelector('.popup__field_type_name');
 const popupAddFieldImage = popupAddElement.querySelector('.popup__field_type_image');
+const popupAddSaveButton = popupEditElement.querySelector('.popup__save-button');
 
 const elementContainer = document.querySelector('.elements');
 const templateElement = document.querySelector('#element-template').content;
 const imagePopup = document.querySelector('.popup_type_image');
-const photoPopup = imagePopup.querySelector('.popup__image');
+const popupImage = imagePopup.querySelector('.popup__image');
 const textPopup = imagePopup.querySelector('.popup__text');
 const imagePopupCloseButton = imagePopup.querySelector('.popup__close-button');
 
@@ -57,9 +58,7 @@ const renderCard = function(card) {
 }
 
 // добавляем изначальные карточки на страничку
-initialCards.forEach(function (card){
-	renderCard(card)
-})
+initialCards.forEach(renderCard)
 
 
 // ф-я для открытия popup с его значениями
@@ -88,8 +87,8 @@ const closeModalWindowByEsc = function(evt) {
 	}
 }
 
-// ф-я для сохранения новых значений popup
-const savePopupValue = function(evt) {
+// ф-я для сохранения новых значений у edit popup
+const saveEditPopupValues = function(evt) {
 	evt.preventDefault()
 	profileName.textContent = popupEditFieldName.value;
 	profileJob.textContent = popupEditFieldJob.value;
@@ -104,6 +103,7 @@ const addNewCard = function(evt) {
 		link: popupAddFieldImage.value
 	};
 	renderCard(valueCard);
+	popupAddSaveButton.classList.add('popup__save-button_inactive');
 	popupAddForm.reset();
 	closeModalWindow(popupAddElement);
 }
@@ -111,8 +111,8 @@ const addNewCard = function(evt) {
 // ф-я открытия popup image
 const openModalImage = function(card) {
 	textPopup.textContent = card.name;
-	photoPopup.src = card.link;
-	photoPopup.alt = card.name;
+	popupImage.src = card.link;
+	popupImage.alt = card.name;
 	openModalWindow(imagePopup);
 }
 
@@ -124,12 +124,12 @@ profileAddButtonElement.addEventListener('click', () => {
 	openModalWindow(popupAddElement);
 });
 
-popupEditForm.addEventListener('submit', savePopupValue);
+popupEditForm.addEventListener('submit', saveEditPopupValues);
 
 popupAddForm.addEventListener('submit', addNewCard);
 
 // закрытие по нажатию на оверлей
-allPopup.forEach(popup => {
+allPopups.forEach(popup => {
 	popup.addEventListener('click', (evt) => {
 		if (evt.target === evt.currentTarget) {
 			closeModalWindow(popup);
@@ -137,9 +137,10 @@ allPopup.forEach(popup => {
 	})
 })
 
+// добавление листенер на кнопки закрытия
 buttonCloseList.forEach(btn => {
 	const popup = btn.closest('.popup');
 	btn.addEventListener('click', () => closeModalWindow(popup))
 })
 
-enableValidation(selectors);
+enableValidation(validationConfig)

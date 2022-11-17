@@ -3,7 +3,7 @@
 	background-color: black;
 	margin: 18px 36px 37px;
 	padding: 14px 0 18px;
-	border: none;
+	border: black solid 1px;
 	border-radius: 2px;
 	font-style: normal;
 	font-weight: 400;
@@ -11,7 +11,7 @@
 	line-height: 1.2;
 }
 
-.popup__save-button:hover {
+.popup__save-button:not([disabled]):hover {
 	opacity: .8;
 	cursor: pointer;
 }

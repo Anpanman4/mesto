@@ -1,64 +1,70 @@
-const showInputError = (errorElement, errorMessage, selectors) => {
+const showInputError = (errorElement, errorMessage, validationConfig) => {
 	errorElement.textContent = errorMessage;
-	errorElement.classList.add(selectors.errorInputActiveSelector);
+	errorElement.classList.add(validationConfig.errorInputActiveClass);
 }
 
-const hideInputError = (errorElement, selectors) => {
+const hideInputError = (errorElement, validationConfig) => {
 	errorElement.textContent = "";
-	errorElement.classList.remove(selectors.errorInputActiveSelector);
+	errorElement.classList.remove(validationConfig.errorInputActiveClass);
 }
 
-const toggleButtonState = (inputList, buttonElement, selectors) => {
+const toggleButtonState = (inputList, buttonElement, validationConfig) => {
 	const hasInvalidInput = inputList.some(inputElement => !inputElement.validity.valid);
 
 	if (hasInvalidInput) {
-		buttonElement.setAttribute("disabled", true)
-		buttonElement.classList.add(selectors.inactiveButtonSelector)
+		turnOffButtom(buttonElement, validationConfig);
 	} else {
-		buttonElement.removeAttribute("disabled")
-		buttonElement.classList.remove(selectors.inactiveButtonSelector)
+		turnOnButtom(buttonElement, validationConfig);
 	}
 }
 
-const checkInputValidity = (inputElement, selectors) => {
+const turnOffButtom = (buttonElement, validationConfig) => {
+	buttonElement.setAttribute("disabled", true);
+	buttonElement.classList.add(validationConfig.inactiveButtonClass);
+}
+
+const turnOnButtom = (buttonElement, validationConfig) => {
+	buttonElement.removeAttribute("disabled");
+	buttonElement.classList.remove(validationConfig.inactiveButtonClass);
+}
+
+const toggleInputErrorState = (inputElement, validationConfig) => {
 	const isValid = inputElement.validity.valid;
 
-	const formSection = inputElement.closest(selectors.sectionSelector);
-	const errorElement = formSection.querySelector(selectors.errorInputSelector)
+	const formInputSection = inputElement.closest(validationConfig.sectionSelector);
+	const errorElement = formInputSection.querySelector(validationConfig.errorInputSelector)
 
 	if (isValid) {
-		hideInputError(errorElement, selectors);
+		hideInputError(errorElement, validationConfig);
 	} else {
-		showInputError(errorElement, inputElement.validationMessage, selectors);
+		showInputError(errorElement, inputElement.validationMessage, validationConfig);
 	}
 }
 
-const setEventListeners = (formElement, selectors) => {
-	formElement.addEventListener('submit', (evt) => evt.preventDefault())
-
-	const inputList = Array.from(formElement.querySelectorAll(selectors.inputSelector));
-	const submitButton = formElement.querySelector(selectors.submitButtonSelector);
+const setEventListeners = (formElement, validationConfig) => {
+	const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
+	const submitButton = formElement.querySelector(validationConfig.submitButtonSelector);
 	
 	inputList.forEach(inputElement => {
 		inputElement.addEventListener('input', () => {
-			checkInputValidity(inputElement, selectors);
-			toggleButtonState(inputList, submitButton, selectors)
+			toggleInputErrorState(inputElement, validationConfig);
+			toggleButtonState(inputList, submitButton, validationConfig)
 		})
 	})
 }
 
-const enableValidation = (selectors) => {
-	const formList = document.querySelectorAll(selectors.formSelector);
+const enableValidation = (validationConfig) => {
+	const formList = document.querySelectorAll(validationConfig.formSelector);
 
-	formList.forEach(form => setEventListeners(form, selectors))
+	formList.forEach(form => setEventListeners(form, validationConfig))
 }
 
-const selectors = {
+const validationConfig = {
 	formSelector: '.popup__form',
 	inputSelector: '.popup__field',
 	submitButtonSelector: '.popup__save-button',
 	sectionSelector: '.popup__section',
 	errorInputSelector: '.popup__field-error',
-	errorInputActiveSelector: 'popup__input-error_active',
-	inactiveButtonSelector: 'popup__save-button_inactive'
+	errorInputActiveClass: 'popup__input-error_active',
+	inactiveButtonClass: 'popup__save-button_inactive'
 }
