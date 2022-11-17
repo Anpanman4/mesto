@@ -18,7 +18,7 @@ const popupAddCloseButtonElement = popupAddElement.querySelector('.popup__close-
 const popupAddForm = popupAddElement.querySelector('.popup__form')
 const popupAddFieldName = popupAddElement.querySelector('.popup__field_type_name');
 const popupAddFieldImage = popupAddElement.querySelector('.popup__field_type_image');
-const popupAddSaveButton = popupEditElement.querySelector('.popup__save-button');
+const popupAddSaveButton = popupAddElement.querySelector('.popup__save-button');
 
 const elementContainer = document.querySelector('.elements');
 const templateElement = document.querySelector('#element-template').content;
