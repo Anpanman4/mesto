@@ -141,3 +141,5 @@ buttonCloseList.forEach(btn => {
 	const popup = btn.closest('.popup');
 	btn.addEventListener('click', () => closeModalWindow(popup))
 })
+
+enableValidation(selectors);
