@@ -103,7 +103,7 @@ const addNewCard = function(evt) {
 		link: popupAddFieldImage.value
 	};
 	renderCard(valueCard);
-	popupAddSaveButton.classList.add('popup__save-button_inactive');
+	turnOffButtom(popupAddSaveButton, validationConfig);
 	popupAddForm.reset();
 	closeModalWindow(popupAddElement);
 }
