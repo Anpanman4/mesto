@@ -112,7 +112,7 @@ popupAddForm.addEventListener('submit', addNewCard);
 
 // закрытие по нажатию на оверлей
 allPopups.forEach(popup => {
-	popup.addEventListener('click', (evt) => {
+	popup.addEventListener('mousedown', (evt) => {
 		if (evt.target === evt.currentTarget) {
 			closeModalWindow(popup);
 		}
@@ -138,6 +138,6 @@ const validationConfig = {
 	inactiveButtonClass: 'popup__save-button_inactive'
 }
 
-document.querySelectorAll(validationConfig.formSelector).forEach((popup) => {
-	new FormValidator(validationConfig, popup).enableValidation();
-})
+const popupsForm = document.querySelectorAll(validationConfig.formSelector);
+new FormValidator(validationConfig, popupsForm[0]).enableValidation();
+new FormValidator(validationConfig, popupsForm[1]).enableValidation();
