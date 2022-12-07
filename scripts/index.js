@@ -1,4 +1,6 @@
 import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+import { initialCards } from "./cards.js";
 
 const profileElement = document.querySelector('.profile');
 const profileName = profileElement.querySelector('.profile__name');
@@ -82,6 +84,12 @@ const addNewCard = function(evt) {
 	closeModalWindow(popupAddElement);
 }
 
+// ф-я выключающая кнопку
+const turnOffButtom = (buttonElement, validationConfig) => {
+	buttonElement.setAttribute("disabled", true);
+	buttonElement.classList.add(validationConfig.inactiveButtonClass);
+}
+
 // ф-я открытия popup image
 const openModalImage = function(card) {
 	textPopup.textContent = card.name;
@@ -120,4 +128,16 @@ buttonCloseList.forEach(btn => {
 // добавляем изначальные карточки на страничку
 initialCards.forEach(renderCard)
 
-enableValidation(validationConfig)
+const validationConfig = {
+	formSelector: '.popup__form',
+	inputSelector: '.popup__field',
+	submitButtonSelector: '.popup__save-button',
+	sectionSelector: '.popup__section',
+	errorInputSelector: '.popup__field-error',
+	errorInputActiveClass: 'popup__input-error_active',
+	inactiveButtonClass: 'popup__save-button_inactive'
+}
+
+document.querySelectorAll(validationConfig.formSelector).forEach((popup) => {
+	new FormValidator(validationConfig, popup).enableValidation();
+})
