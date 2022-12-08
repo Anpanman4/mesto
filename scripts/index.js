@@ -17,7 +17,7 @@ const popupEditFieldName = popupEditElement.querySelector('.popup__field_type_na
 const popupEditFieldJob = popupEditElement.querySelector('.popup__field_type_job');
 
 const popupAddElement = document.querySelector('.popup_type_add');
-const popupAddForm = popupAddElement.querySelector('.popup__form')
+const popupAddForm = popupAddElement.querySelector('.popup__form');
 const popupAddFieldName = popupAddElement.querySelector('.popup__field_type_name');
 const popupAddFieldImage = popupAddElement.querySelector('.popup__field_type_image');
 const popupAddSaveButton = popupAddElement.querySelector('.popup__save-button');
@@ -138,6 +138,7 @@ const validationConfig = {
 	inactiveButtonClass: 'popup__save-button_inactive'
 }
 
-const popupsForm = document.querySelectorAll(validationConfig.formSelector);
-new FormValidator(validationConfig, popupsForm[0]).enableValidation();
-new FormValidator(validationConfig, popupsForm[1]).enableValidation();
+const addPopupValidator = new FormValidator(validationConfig, popupAddForm);
+const editPopupValidator = new FormValidator(validationConfig, popupEditForm);
+addPopupValidator.enableValidation();
+editPopupValidator.enableValidation();
