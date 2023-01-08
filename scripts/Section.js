@@ -3,11 +3,10 @@ export default class Section {
     this._rendererItems = items;
     this._renderer = renderer;
     this._container = document.querySelector(itemSelector);
-    console.log('working sec')
   }
 
   addItem(element) {
-    this._container.append(element)
+    this._container.prepend(element)
   }
 
   renderer() {

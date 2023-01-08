@@ -8,14 +8,11 @@ import UserInfo from "./UserInfo.js";
 import { initialCards } from "./cards.js";
 
 import {
-  profileName,
-  profileJob,
   popupEditButtonElement,
   profileAddButtonElement,
   popupEditForm,
   popupAddForm,
-  popupAddSaveButton,
-  elementContainer
+  popupAddSaveButton
 } from '../utils/constants.js'
 
 const validationConfig = {
@@ -32,6 +29,17 @@ const validationConfig = {
 const popupImageClass = new PopupWithImage('.popup_type_image');
 
 popupImageClass.setEventListeners();
+
+
+// Section: добавление изначальных карточек
+
+const cardSection = new Section({ items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, '#element-template', popupImageClass).render();
+    cardSection.addItem(card);
+  }}, '.elements');
+
+cardSection.renderer();
 
 
 // код для работы валидации
@@ -65,9 +73,11 @@ popupEditButtonElement.addEventListener('click', () => {
 const popupAddClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
-  console.log(inputValue)
-  renderCard(inputValue);
+  const card = new Card(inputValue, '#element-template', popupImageClass).render()
+  cardSection.addItem(card);
+
   turnOffButtom(popupAddSaveButton, validationConfig);
+
   popupAddClass.close();
 }}, '.popup_type_add')
 
@@ -77,19 +87,6 @@ profileAddButtonElement.addEventListener('click', () => {
   popupAddClass.open();
 })
 
-
-// ф-я создания карточки с совсеми ивеннтами
-const makeCard = function(card) {
-  return new Card(card, '#element-template', popupImageClass).render();
-}
-
-// ф-я для добавления карточки	
-const renderCard = function(card) {
-  elementContainer.prepend(makeCard(card));
-}
-
-// добавляем изначальные карточки на страничку
-initialCards.forEach(renderCard)
 
 // ф-я выключающая кнопку
 const turnOffButtom = (buttonElement, validationConfig) => {
