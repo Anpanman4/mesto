@@ -11,19 +11,10 @@ import {
   profileJob,
   popupEditButtonElement,
   profileAddButtonElement,
-  popupEditElement,
   popupEditForm,
-  popupEditFieldName,
-  popupEditFieldJob,
-  popupAddElement,
   popupAddForm,
-  popupAddFieldName,
-  popupAddFieldImage,
   popupAddSaveButton,
-  elementContainer,
-  imagePopup,
-  popupImage,
-  textPopup
+  elementContainer
 } from '../utils/constants.js'
 
 // код для работы Popup с Image
