@@ -3,6 +3,7 @@ import Section from "./Section.js";
 import FormValidator from "./FormValidator.js";
 import PopupWithForm from "./PopupWithForm.js";
 import PopupWithImage from "./PopupWithImage.js";
+import UserInfo from "./UserInfo.js";
 
 import { initialCards } from "./cards.js";
 
@@ -32,21 +33,14 @@ const renderCard = function(card) {
   elementContainer.prepend(makeCard(card));
 }
 
-// ф-я для открытия popup с его значениями
-// const openEditModalWindow = function() {
-//   popupEditFieldName.value = profileName.textContent;
-//   popupEditFieldJob.value = profileJob.textContent;
-//   openModalWindow(popupEditElement);
-// }
+// добавляем изначальные карточки на страничку
+initialCards.forEach(renderCard)
 
 // ф-я выключающая кнопку
 const turnOffButtom = (buttonElement, validationConfig) => {
   buttonElement.setAttribute("disabled", true);
   buttonElement.classList.add(validationConfig.inactiveButtonClass);
 }
-
-// добавляем изначальные карточки на страничку
-initialCards.forEach(renderCard)
 
 const validationConfig = {
   formSelector: '.popup__form',
@@ -64,12 +58,14 @@ const editPopupValidator = new FormValidator(validationConfig, popupEditForm);
 addPopupValidator.enableValidation();
 editPopupValidator.enableValidation();
 
-// код для работы Popup редактирования пользователя
+// UserInfo - код для управления информации о пользователе
+const userInfo = new UserInfo('.profile__name', '.profile__job')
+
+// PopupEdit - код для работы Popup редактирования пользователя
 const popupEditClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
-  profileName.textContent = inputValue.name;
-  profileJob.textContent = inputValue.job;
+  userInfo.setUserInfo(inputValue)
 
   popupEditClass.close();
 }}, '.popup_type_edit')
@@ -80,7 +76,7 @@ popupEditButtonElement.addEventListener('click', () => {
   popupEditClass.open();
 });
 
-// код для работы Popup добавления карточки
+// PopupAdd - код для работы Popup добавления карточки
 const popupAddClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
