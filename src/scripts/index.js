@@ -5,25 +5,17 @@ import PopupWithForm from "./PopupWithForm.js";
 import PopupWithImage from "./PopupWithImage.js";
 import UserInfo from "./UserInfo.js";
 
-import { initialCards } from "./cards.js";
-
 import {
   popupEditButtonElement,
   profileAddButtonElement,
   popupEditForm,
   popupAddForm,
-  popupAddSaveButton
+  popupAddSaveButton,
+  initialCards,
+  validationConfig
 } from '../utils/constants.js'
+import { turnOffButtom } from '../utils/utils.js'
 
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__save-button',
-  sectionSelector: '.popup__section',
-  errorInputSelector: '.popup__field-error',
-  errorInputActiveClass: 'popup__input-error_active',
-  inactiveButtonClass: 'popup__save-button_inactive'
-}
 
 // код для работы Popup с Image
 const popupImageClass = new PopupWithImage('.popup_type_image');
@@ -76,7 +68,7 @@ const popupAddClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
   const card = new Card(inputValue, '#element-template', popupImageClass).render()
   cardSection.addItem(card);
 
-  turnOffButtom(popupAddSaveButton, validationConfig);
+  turnOffButtom(popupAddSaveButton);
 
   popupAddClass.close();
 }}, '.popup_type_add')
@@ -88,8 +80,3 @@ profileAddButtonElement.addEventListener('click', () => {
 })
 
 
-// ф-я выключающая кнопку
-const turnOffButtom = (buttonElement, validationConfig) => {
-  buttonElement.setAttribute("disabled", true);
-  buttonElement.classList.add(validationConfig.inactiveButtonClass);
-}
