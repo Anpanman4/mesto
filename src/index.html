@@ -3,18 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
 <body class="page">
   <header class="header">
-    <img class="header__logo" src="./images/logo.svg" alt="Место">
+    <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Место">
   </header>
 
   <main class="">
     <section class="profile">
       <div class="profile__container">
-        <img class="profile__avatar" src="./images/Avatar.png" alt="Аватарка">
+        <img class="profile__avatar" src="<%=require('./images/Avatar.png')%>" alt="Аватарка">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__edit-button" type="button" aria-label="Редактирование"></button>
@@ -28,7 +27,7 @@
       <ul class="elements">
         <template id="element-template">
           <li class="element">
-            <img class="element__trash" src="./images/Trash.svg" alt="удалить">
+            <img class="element__trash" src="<%=require('./images/Trash.svg')%>" alt="удалить">
             <img class="element__image" src="#" alt="">
             <div class="element__container">
               <h2 class="element__place"></h2>
@@ -87,8 +86,6 @@
       <h2 class="popup__text"></h2>
     </div>
   </div>
-
-  <script defer type="module" src="./pages/index.js"></script>
 </body>
 </html>
 
