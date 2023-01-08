@@ -1,31 +1,30 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
+import Section from "./Section.js";
+import Popup from "./Popup.js";
 import { initialCards } from "./cards.js";
 
-const profileElement = document.querySelector('.profile');
-const profileName = profileElement.querySelector('.profile__name');
-const profileJob = profileElement.querySelector('.profile__job');
-const popupEditButtonElement = profileElement.querySelector('.profile__edit-button');
-const profileAddButtonElement = profileElement.querySelector('.profile__add-button');
-
-const buttonCloseList = document.querySelectorAll('.popup__close-button');
-const allPopups = document.querySelectorAll('.popup');
-
-const popupEditElement = document.querySelector('.popup_type_edit');
-const popupEditForm = popupEditElement.querySelector('.popup__form');
-const popupEditFieldName = popupEditElement.querySelector('.popup__field_type_name');
-const popupEditFieldJob = popupEditElement.querySelector('.popup__field_type_job');
-
-const popupAddElement = document.querySelector('.popup_type_add');
-const popupAddForm = popupAddElement.querySelector('.popup__form');
-const popupAddFieldName = popupAddElement.querySelector('.popup__field_type_name');
-const popupAddFieldImage = popupAddElement.querySelector('.popup__field_type_image');
-const popupAddSaveButton = popupAddElement.querySelector('.popup__save-button');
-
-const elementContainer = document.querySelector('.elements');
-const imagePopup = document.querySelector('.popup_type_image');
-const popupImage = imagePopup.querySelector('.popup__image');
-const textPopup = imagePopup.querySelector('.popup__text');
+import {
+  profileName,
+  profileJob,
+  popupEditButtonElement,
+  profileAddButtonElement,
+  buttonCloseList,
+  allPopups,
+  popupEditElement,
+  popupEditForm,
+  popupEditFieldName,
+  popupEditFieldJob,
+  popupAddElement,
+  popupAddForm,
+  popupAddFieldName,
+  popupAddFieldImage,
+  popupAddSaveButton,
+  elementContainer,
+  imagePopup,
+  popupImage,
+  textPopup
+} from '../utils/constants.js'
 
 // ф-я создания карточки с совсеми ивеннтами
 const makeCard = function(card) {
@@ -47,21 +46,21 @@ const openEditModalWindow = function() {
 // ф-я для открытия popup
 const openModalWindow = function(item) {
   item.classList.add('popup_opened');
-  document.addEventListener('keydown', closeModalWindowByEsc)
+  // document.addEventListener('keydown', closeModalWindowByEsc)
 }
 
 // ф-я для закрытия popup
 const closeModalWindow = function(item) {
   item.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeModalWindowByEsc)
+  // document.removeEventListener('keydown', closeModalWindowByEsc)
 }
 
 // ф-я для закрытия popup по нажатию на esc
-const closeModalWindowByEsc = function(evt) {
-  if (evt.key === "Escape") {
-    closeModalWindow(document.querySelector('.popup_opened'));
-  }
-}
+// const closeModalWindowByEsc = function(evt) {
+//   if (evt.key === "Escape") {
+//     closeModalWindow(document.querySelector('.popup_opened'));
+//   }
+// }
 
 // ф-я для сохранения новых значений у edit popup
 const saveEditPopupValues = function(evt) {
@@ -98,32 +97,32 @@ const openModalImage = function(card) {
   openModalWindow(imagePopup);
 }
 
-popupEditButtonElement.addEventListener('click', () => {
-  openEditModalWindow(popupEditElement);
-});
+// popupEditButtonElement.addEventListener('click', () => {
+//   openEditModalWindow(popupEditElement);
+// });
 
-profileAddButtonElement.addEventListener('click', () => {
-  openModalWindow(popupAddElement);
-});
+// profileAddButtonElement.addEventListener('click', () => {
+//   openModalWindow(popupAddElement);
+// });
 
-popupEditForm.addEventListener('submit', saveEditPopupValues);
+// popupEditForm.addEventListener('submit', saveEditPopupValues);
 
-popupAddForm.addEventListener('submit', addNewCard);
+// popupAddForm.addEventListener('submit', addNewCard);
 
 // закрытие по нажатию на оверлей
-allPopups.forEach(popup => {
-  popup.addEventListener('mousedown', (evt) => {
-    if (evt.target === evt.currentTarget) {
-      closeModalWindow(popup);
-    }
-  })
-})
+// allPopups.forEach(popup => {
+//   popup.addEventListener('mousedown', (evt) => {
+//     if (evt.target === evt.currentTarget) {
+//       closeModalWindow(popup);
+//     }
+//   })
+// })
 
 // добавление листенер на кнопки закрытия
-buttonCloseList.forEach(btn => {
-  const popup = btn.closest('.popup');
-  btn.addEventListener('click', () => closeModalWindow(popup))
-})
+// buttonCloseList.forEach(btn => {
+//   const popup = btn.closest('.popup');
+//   btn.addEventListener('click', () => closeModalWindow(popup))
+// })
 
 // добавляем изначальные карточки на страничку
 initialCards.forEach(renderCard)
@@ -142,3 +141,17 @@ const addPopupValidator = new FormValidator(validationConfig, popupAddForm);
 const editPopupValidator = new FormValidator(validationConfig, popupEditForm);
 addPopupValidator.enableValidation();
 editPopupValidator.enableValidation();
+
+const popupEditClass = new Popup('.popup_type_edit')
+popupEditClass.setEventListeners();
+
+const popupAddClass = new Popup('.popup_type_add')
+popupAddClass.setEventListeners();
+
+popupEditButtonElement.addEventListener('click', () => {
+  popupEditClass.open();
+});
+
+profileAddButtonElement.addEventListener('click', () => {
+  popupAddClass.open();
+})
