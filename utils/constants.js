@@ -4,9 +4,6 @@ export const profileJob = profileElement.querySelector('.profile__job');
 export const popupEditButtonElement = profileElement.querySelector('.profile__edit-button');
 export const profileAddButtonElement = profileElement.querySelector('.profile__add-button');
 
-export const buttonCloseList = document.querySelectorAll('.popup__close-button');
-export const allPopups = document.querySelectorAll('.popup');
-
 export const popupEditElement = document.querySelector('.popup_type_edit');
 export const popupEditForm = popupEditElement.querySelector('.popup__form');
 export const popupEditFieldName = popupEditElement.querySelector('.popup__field_type_name');

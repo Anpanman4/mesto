@@ -1,9 +1,9 @@
 export default class Card {
 
-  constructor(card, template, openModalImage) {
+  constructor(card, template, popupImage) {
     this._cardDetails = card;
     this._templateId = template;
-    this._openModalImage = openModalImage;
+    this._popupImage = popupImage;
   }
 
   _getTemplate = () => {
@@ -16,7 +16,7 @@ export default class Card {
     return cardElement;
   }
 
-  _setEventListeners = () => {		
+  _setEventListeners = () => {
     this._element.querySelector('.element__like').addEventListener('click', this._toggleLikeHandler)
     this._element.querySelector('.element__trash').addEventListener('click', this._removeCardHandler);
     this._element.querySelector('.element__image').addEventListener('click', this._openModalImageHandler);
@@ -31,7 +31,7 @@ export default class Card {
   }
 
   _openModalImageHandler = () => {
-    this._openModalImage(this._cardDetails);
+    this._popupImage.open(this._cardDetails);
   }
 
   _addCardDetails = () => {
