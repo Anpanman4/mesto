@@ -7,7 +7,6 @@ export const popupEditForm = popupEditElement.querySelector('.popup__form');
 
 export const popupAddElement = document.querySelector('.popup_type_add');
 export const popupAddForm = popupAddElement.querySelector('.popup__form');
-export const popupAddSaveButton = popupAddElement.querySelector('.popup__save-button');
 
 export const initialCards = [
   {

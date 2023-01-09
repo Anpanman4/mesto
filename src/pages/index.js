@@ -12,24 +12,29 @@ import {
   profileAddButtonElement,
   popupEditForm,
   popupAddForm,
-  popupAddSaveButton,
   initialCards,
   validationConfig
 } from '../utils/constants.js'
-import { turnOffButtom } from '../utils/utils.js'
 
 
 // код для работы Popup с Image
-const popupImageClass = new PopupWithImage('.popup_type_image');
+export const popupImageClass = new PopupWithImage('.popup_type_image');
 
 popupImageClass.setEventListeners();
+
+
+// ф-я создания карточки
+export const createCard = (item) => {
+  const cardElement = new Card(item, '#element-template', popupImageClass).render();
+  return cardElement;
+}
 
 
 // Section: добавление изначальных карточек
 
 const cardSection = new Section({ items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, '#element-template', popupImageClass).render();
+    const card = createCard(item);
     cardSection.addItem(card);
   }}, '.elements');
 
@@ -51,7 +56,7 @@ const userInfo = new UserInfo('.profile__name', '.profile__job')
 const popupEditClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
-  userInfo.setUserInfo(inputValue)
+  userInfo.setUserInfo(inputValue);
 
   popupEditClass.close();
 }}, '.popup_type_edit')
@@ -59,6 +64,10 @@ const popupEditClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
 popupEditClass.setEventListeners();
 
 popupEditButtonElement.addEventListener('click', () => {
+  popupEditClass.setInputValues(userInfo.getUserInfo());
+
+  editPopupValidator.resetValidation();
+
   popupEditClass.open();
 });
 
@@ -67,10 +76,8 @@ popupEditButtonElement.addEventListener('click', () => {
 const popupAddClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
-  const card = new Card(inputValue, '#element-template', popupImageClass).render()
+  const card = createCard(inputValue);
   cardSection.addItem(card);
-
-  turnOffButtom(popupAddSaveButton);
 
   popupAddClass.close();
 }}, '.popup_type_add')
@@ -78,6 +85,8 @@ const popupAddClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
 popupAddClass.setEventListeners();
 
 profileAddButtonElement.addEventListener('click', () => {
+  addPopupValidator.resetValidation();
+
   popupAddClass.open();
 })
 

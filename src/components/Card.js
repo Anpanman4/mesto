@@ -17,13 +17,13 @@ export default class Card {
   }
 
   _setEventListeners = () => {
-    this._element.querySelector('.element__like').addEventListener('click', this._toggleLikeHandler)
-    this._element.querySelector('.element__trash').addEventListener('click', this._removeCardHandler);
-    this._element.querySelector('.element__image').addEventListener('click', this._openModalImageHandler);
+    this._elementLike.addEventListener('click', this._toggleLikeHandler)
+    this._elementTrash.addEventListener('click', this._removeCardHandler);
+    this._elementImage.addEventListener('click', this._openModalImageHandler);
   }
 
   _toggleLikeHandler = () => {
-    this._element.querySelector('.element__like').classList.toggle('element__like_active');
+    this._elementLike.classList.toggle('element__like_active');
   }
 
   _removeCardHandler = () => {
@@ -44,6 +44,10 @@ export default class Card {
 
   render() {
     this._element = this._getTemplate();
+    this._elementLike = this._element.querySelector('.element__like');
+    this._elementTrash = this._element.querySelector('.element__trash');
+    this._elementImage = this._element.querySelector('.element__image');
+
     this._setEventListeners();
     this._addCardDetails();
 
