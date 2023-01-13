@@ -6,6 +6,7 @@ import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 
 import {
   popupEditButtonElement,
@@ -49,7 +50,7 @@ editPopupValidator.enableValidation();
 
 
 // UserInfo - код для управления информации о пользователе
-const userInfo = new UserInfo('.profile__name', '.profile__job')
+const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar')
 
 
 // PopupEdit - код для работы Popup редактирования пользователя
@@ -89,5 +90,22 @@ profileAddButtonElement.addEventListener('click', () => {
 
   popupAddClass.open();
 })
+
+
+// код для работы с API
+const api = new Api({
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-57/",
+  headers: {
+    authorization: "8a834428-9740-47ce-9a26-1ae204198268",
+    "Content-Type": "application/json"
+  }
+})
+
+const userServer = api.getUser()
+userServer
+  .then((data) => {
+    userInfo.setUserInfo(data)
+    userInfo.setUserAvatar(data)
+  })
 
 
