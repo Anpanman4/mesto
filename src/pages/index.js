@@ -13,9 +13,18 @@ import {
   profileAddButtonElement,
   popupEditForm,
   popupAddForm,
-  initialCards,
   validationConfig
 } from '../utils/constants.js'
+
+
+// код для работы с API
+const api = new Api({
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-57/",
+  headers: {
+    authorization: "8a834428-9740-47ce-9a26-1ae204198268",
+    "Content-Type": "application/json"
+  }
+})
 
 
 // код для работы Popup с Image
@@ -32,14 +41,12 @@ export const createCard = (item) => {
 
 
 // Section: добавление изначальных карточек
-
-const cardSection = new Section({ items: initialCards,
+const cardSection = new Section({
   renderer: (item) => {
     const card = createCard(item);
     cardSection.addItem(card);
-  }}, '.elements');
-
-cardSection.renderer();
+  }}, '.elements'
+  , api);
 
 
 // код для работы валидации
@@ -91,21 +98,19 @@ profileAddButtonElement.addEventListener('click', () => {
   popupAddClass.open();
 })
 
-
-// код для работы с API
-const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-57/",
-  headers: {
-    authorization: "8a834428-9740-47ce-9a26-1ae204198268",
-    "Content-Type": "application/json"
-  }
-})
-
-const userServer = api.getUser()
-userServer
+const userData = api.getUser()
+userData
   .then((data) => {
     userInfo.setUserInfo(data)
     userInfo.setUserAvatar(data)
   })
+  .catch(err => console.log(err))
+
+const initialCards = api.getInitialCards()
+initialCards
+  .then((cards) => {
+    cardSection.renderer(cards);
+  })
+  .catch(err => console.log(err))
 
 
