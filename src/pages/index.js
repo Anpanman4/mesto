@@ -84,10 +84,16 @@ popupEditButtonElement.addEventListener('click', () => {
 const popupAddClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
-  const card = createCard(inputValue);
-  cardSection.addItem(card);
+// отправляем данные на создание карточки и отрисовываем ее
+  const newCard = api.createNewCard(inputValue)
+  newCard
+    .then((data) => {
+      const card = createCard(data);
+      cardSection.addItem(card);
 
-  popupAddClass.close();
+      popupAddClass.close();
+    })
+
 }}, '.popup_type_add')
 
 popupAddClass.setEventListeners();
@@ -98,6 +104,7 @@ profileAddButtonElement.addEventListener('click', () => {
   popupAddClass.open();
 })
 
+// получаем данные о пользователе с сервера и вставляем их
 const userData = api.getUserValues()
 userData
   .then((data) => {
@@ -106,6 +113,7 @@ userData
   })
   .catch(err => console.log(err))
 
+// получаем карточки с сервера и отрисовываем их
 const initialCards = api.getInitialCards()
 initialCards
   .then((cards) => {
