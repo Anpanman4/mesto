@@ -3,6 +3,7 @@ import "./index.css";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
+import Popup from "../components/Popup";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
@@ -33,9 +34,13 @@ export const popupImageClass = new PopupWithImage('.popup_type_image');
 popupImageClass.setEventListeners();
 
 
+// Popup: popup delete
+const popupDelete = new Popup('.popup_type_delete');
+popupDelete.setEventListeners();
+
 // ф-я создания карточки
 export const createCard = (item) => {
-  const cardElement = new Card(item, '#element-template', popupImageClass).render();
+  const cardElement = new Card(item, '#element-template', popupImageClass, popupDelete).render();
   return cardElement;
 }
 

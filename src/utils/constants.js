@@ -8,6 +8,8 @@ export const popupEditForm = popupEditElement.querySelector('.popup__form');
 export const popupAddElement = document.querySelector('.popup_type_add');
 export const popupAddForm = popupAddElement.querySelector('.popup__form');
 
+export const popupDeleteElement = document.querySelector('.popup_type_delete')
+
 export const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__field',

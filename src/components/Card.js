@@ -1,10 +1,11 @@
 export default class Card {
 
-  constructor(card, template, popupImage) {
+  constructor(card, template, popupImage, popupDelete) {
     this._cardDetails = card;
     this._templateId = template;
     this._popupImage = popupImage;
     this._numberOfLikes = card.likes.length
+    this._popupDelete = popupDelete;
   }
 
   _getTemplate = () => {
@@ -19,8 +20,10 @@ export default class Card {
 
   _setEventListeners = () => {
     this._elementLike.addEventListener('click', this._toggleLikeHandler)
-    this._elementTrash.addEventListener('click', this._removeCardHandler);
     this._elementImage.addEventListener('click', this._openModalImageHandler);
+    this._elementTrash.addEventListener('click', () => {
+      this._popupDelete.open();
+    });
   }
 
   _toggleLikeHandler = () => {
