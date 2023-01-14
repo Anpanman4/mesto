@@ -4,6 +4,7 @@ export default class Card {
     this._cardDetails = card;
     this._templateId = template;
     this._popupImage = popupImage;
+    this._numberOfLikes = card.likes.length
   }
 
   _getTemplate = () => {
@@ -47,6 +48,9 @@ export default class Card {
     this._elementLike = this._element.querySelector('.element__like');
     this._elementTrash = this._element.querySelector('.element__trash');
     this._elementImage = this._element.querySelector('.element__image');
+    this._elementNumberLikes = this._element.querySelector('.element__likes-number');
+
+    this._elementNumberLikes.textContent = this._numberOfLikes;
 
     this._setEventListeners();
     this._addCardDetails();
