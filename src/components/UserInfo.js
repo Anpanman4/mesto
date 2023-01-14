@@ -1,8 +1,16 @@
 export default class UserInfo {
-  constructor(name, about, avatar) {
+  constructor(name, about, avatar, api) {
     this._name = document.querySelector(name);
     this._about = document.querySelector(about);
     this._avatar = document.querySelector(avatar);
+    this._api = api;
+  }
+
+  updateUserInfo(body) {
+    const response = this._api.updateUserValues(body)
+    response
+      .then(res => this.setUserInfo(res))
+      .catch((err) => console.log(err));
   }
 
   getUserInfo() {

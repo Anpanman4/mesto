@@ -57,14 +57,14 @@ editPopupValidator.enableValidation();
 
 
 // UserInfo - код для управления информации о пользователе
-const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar')
+const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar', api)
 
 
 // PopupEdit - код для работы Popup редактирования пользователя
 const popupEditClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
-  userInfo.setUserInfo(inputValue);
+  userInfo.updateUserInfo(inputValue);
 
   popupEditClass.close();
 }}, '.popup_type_edit')
@@ -98,7 +98,7 @@ profileAddButtonElement.addEventListener('click', () => {
   popupAddClass.open();
 })
 
-const userData = api.getUser()
+const userData = api.getUserValues()
 userData
   .then((data) => {
     userInfo.setUserInfo(data)

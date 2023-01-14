@@ -12,12 +12,12 @@ export default class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getUser() {
+  getUserValues() {
     return fetch(this._url + "users/me/", {
       headers: this._headers
     })
     .then(res => this._check(res))
-    .catch(err => console.log(err))
+    .catch(err => console.log('GET user', err))
   }
 
   getInitialCards() {
@@ -25,6 +25,16 @@ export default class Api {
       headers: this._headers
     })
     .then(res => this._check(res))
-    .catch(err => console.log(err))
+    .catch(err => console.log('GET cards', err))
+  }
+
+  updateUserValues(body) {
+    return fetch(this._url + "users/me/", {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify(body)
+    })
+    .then(res => this._check(res))
+    .catch(err => console.log('PATCH user', err))
   }
 }
