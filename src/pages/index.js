@@ -12,8 +12,10 @@ import Api from "../components/Api.js";
 import {
   popupEditButtonElement,
   profileAddButtonElement,
+  profileAvatarButton,
   popupEditForm,
   popupAddForm,
+  popupAvatarForm,
   validationConfig
 } from '../utils/constants.js'
 
@@ -29,7 +31,7 @@ const api = new Api({
 
 
 // код для работы Popup с Image
-export const popupImageClass = new PopupWithImage('.popup_type_image');
+const popupImageClass = new PopupWithImage('.popup_type_image');
 
 popupImageClass.setEventListeners();
 
@@ -65,8 +67,10 @@ const cardSection = new Section({
 // код для работы валидации
 const addPopupValidator = new FormValidator(validationConfig, popupAddForm);
 const editPopupValidator = new FormValidator(validationConfig, popupEditForm);
+const avatarPopupValidator = new FormValidator(validationConfig, popupAvatarForm);
 addPopupValidator.enableValidation();
 editPopupValidator.enableValidation();
+avatarPopupValidator.enableValidation();
 
 
 // UserInfo - код для управления информации о пользователе
@@ -97,7 +101,6 @@ popupEditButtonElement.addEventListener('click', () => {
 const popupAddClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
-
 // отправляем данные на создание карточки и отрисовываем ее
   const newCard = api.createNewCard(inputValue)
   newCard
@@ -117,6 +120,24 @@ profileAddButtonElement.addEventListener('click', () => {
 
   popupAddClass.open();
 })
+
+
+// код создания Popup avatar
+const popupAvatarClass = new PopupWithForm({ submitFunc: (evt, inputValue) => {
+  evt.preventDefault();
+
+  userInfo.updateUserAvatar(inputValue);
+
+  popupAvatarClass.close();
+}}, '.popup_type_avatar')
+popupAvatarClass.setEventListeners();
+
+profileAvatarButton.addEventListener('click', () => {
+  avatarPopupValidator.resetValidation();
+
+  popupAvatarClass.open();
+})
+
 
 // получаем данные о пользователе с сервера и вставляем их
 const userData = api.getUserValues()

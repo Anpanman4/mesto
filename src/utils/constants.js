@@ -1,6 +1,7 @@
 export const profileElement = document.querySelector('.profile');
 export const popupEditButtonElement = profileElement.querySelector('.profile__edit-button');
 export const profileAddButtonElement = profileElement.querySelector('.profile__add-button');
+export const profileAvatarButton = profileElement.querySelector('.profile__avatar');
 
 export const popupEditElement = document.querySelector('.popup_type_edit');
 export const popupEditForm = popupEditElement.querySelector('.popup__form');
@@ -10,6 +11,10 @@ export const popupAddForm = popupAddElement.querySelector('.popup__form');
 
 export const popupDeleteElement = document.querySelector('.popup_type_delete')
 export const popupDeleteButton = popupDeleteElement.querySelector('.popup__save-button');
+
+export const popupAvatarElement = document.querySelector('.popup_type_avatar')
+export const popupAvatarForm = popupAvatarElement.querySelector('.popup__form');
+
 
 export const validationConfig = {
   formSelector: '.popup__form',

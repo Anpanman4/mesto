@@ -30,6 +30,16 @@ export default class Api {
     .catch(err => console.log('PATCH user', err))
   }
 
+  updateUserAvatar(body) {
+    return fetch(this._url + "users/me/avatar/", {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify(body)
+    })
+    .then(res => this._check(res))
+    .catch(err => console.log('PATCH avatar', err))
+  }
+
   getInitialCards() {
     return fetch(this._url + "cards/", {
       headers: this._headers
@@ -58,7 +68,7 @@ export default class Api {
       headers: this._headers,
     })
     .then(res => this._check(res))
-    .catch(err => console.log('POST cards', err))
+    .catch(err => console.log('DELETE card', err))
   }
 
   doLike(id) {
@@ -67,7 +77,7 @@ export default class Api {
       headers: this._headers,
     })
     .then(res => this._check(res))
-    .catch(err => console.log('POST cards', err))
+    .catch(err => console.log('POST do like', err))
   }
 
   deleteLike(id) {
@@ -76,6 +86,6 @@ export default class Api {
       headers: this._headers,
     })
     .then(res => this._check(res))
-    .catch(err => console.log('POST cards', err))
+    .catch(err => console.log('POST delete like', err))
   }
 }

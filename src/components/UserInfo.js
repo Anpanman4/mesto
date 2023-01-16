@@ -6,21 +6,6 @@ export default class UserInfo {
     this._api = api;
   }
 
-  updateUserInfo(body) {
-    const response = this._api.updateUserValues(body)
-    response
-      .then(res => this.setUserInfo(res))
-      .catch((err) => console.log(err));
-  }
-
-  setUserOwner(owner) {
-    this._owner = owner;
-  }
-
-  getUserOwner() {
-    return this._owner;
-  }
-
   getUserInfo() {
     return {
       name: this._name.textContent,
@@ -34,7 +19,29 @@ export default class UserInfo {
     this._avatar.alt = inputValue.name;
   }
 
+  updateUserInfo(body) {
+    const response = this._api.updateUserValues(body)
+    response
+      .then(res => this.setUserInfo(res))
+      .catch((err) => console.log(err));
+  }
+
+  getUserOwner() {
+    return this._owner;
+  }
+
+  setUserOwner(owner) {
+    this._owner = owner;
+  }
+
   setUserAvatar(data) {
     this._avatar.src = data.avatar;
+  }
+
+  updateUserAvatar(body) {
+    const response = this._api.updateUserAvatar(body)
+    response
+      .then(res => this.setUserAvatar(res))
+      .catch((err) => console.log(err));
   }
 }
