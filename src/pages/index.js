@@ -10,12 +10,15 @@ import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 
 import {
-  popupEditButtonElement,
+  profileEditButtonElement,
   profileAddButtonElement,
   profileAvatarButton,
   popupEditForm,
   popupAddForm,
   popupAvatarForm,
+  popupEditButton,
+  popupAddButton,
+  popupAvatarButton,
   validationConfig
 } from '../utils/constants.js'
 
@@ -43,7 +46,6 @@ popupDeleteClass.setEventListeners();
 
 // ф-я удаляющая карточку с сервера
 const deleteCardServer = (id) => {
-  console.log('его', id)
   api.deleteCard(id)
 }
 
@@ -81,6 +83,8 @@ const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avat
 const popupEditClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
+  popupEditButton.textContent = "Сохранение...";
+
   userInfo.updateUserInfo(inputValue);
 
   popupEditClass.close();
@@ -88,10 +92,12 @@ const popupEditClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
 
 popupEditClass.setEventListeners();
 
-popupEditButtonElement.addEventListener('click', () => {
+profileEditButtonElement.addEventListener('click', () => {
   popupEditClass.setInputValues(userInfo.getUserInfo());
 
   editPopupValidator.resetValidation();
+
+  popupEditButton.textContent = "Сохранить";
 
   popupEditClass.open();
 });
@@ -101,6 +107,7 @@ popupEditButtonElement.addEventListener('click', () => {
 const popupAddClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
+  popupAddButton.textContent = "Сохранение...";
 // отправляем данные на создание карточки и отрисовываем ее
   const newCard = api.createNewCard(inputValue)
   newCard
@@ -118,6 +125,8 @@ popupAddClass.setEventListeners();
 profileAddButtonElement.addEventListener('click', () => {
   addPopupValidator.resetValidation();
 
+  popupAddButton.textContent = "Создать";
+
   popupAddClass.open();
 })
 
@@ -128,12 +137,16 @@ const popupAvatarClass = new PopupWithForm({ submitFunc: (evt, inputValue) => {
 
   userInfo.updateUserAvatar(inputValue);
 
+  popupAvatarButton.textContent = "Сохранение...";
+
   popupAvatarClass.close();
 }}, '.popup_type_avatar')
 popupAvatarClass.setEventListeners();
 
 profileAvatarButton.addEventListener('click', () => {
   avatarPopupValidator.resetValidation();
+
+  popupAvatarButton.textContent = "Сохранить";
 
   popupAvatarClass.open();
 })

@@ -55,10 +55,6 @@ export default class Api {
       body: JSON.stringify(body)
     })
     .then(res => this._check(res))
-    .then(res => {
-      console.log(res)
-      return res
-    })
     .catch(err => console.log('POST cards', err))
   }
 
