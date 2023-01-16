@@ -60,4 +60,22 @@ export default class Api {
     .then(res => this._check(res))
     .catch(err => console.log('POST cards', err))
   }
+
+  doLike(id) {
+    return fetch(`${this._url}cards/${id}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    })
+    .then(res => this._check(res))
+    .catch(err => console.log('POST cards', err))
+  }
+
+  deleteLike(id) {
+    return fetch(`${this._url}cards/${id}/likes`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+    .then(res => this._check(res))
+    .catch(err => console.log('POST cards', err))
+  }
 }

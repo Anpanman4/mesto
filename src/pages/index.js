@@ -48,7 +48,7 @@ const deleteCardServer = (id) => {
 
 // ф-я создания карточки
 const createCard = (item) => {
-  const cardElement = new Card(item, '#element-template', popupImageClass, popupDeleteClass, userInfo.getUserOwner(), deleteCardServer).render();
+  const cardElement = new Card(item, '#element-template', popupImageClass, popupDeleteClass, userInfo.getUserOwner(), deleteCardServer, api).render();
   return cardElement;
 }
 
