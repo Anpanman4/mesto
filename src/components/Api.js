@@ -45,6 +45,19 @@ export default class Api {
       body: JSON.stringify(body)
     })
     .then(res => this._check(res))
+    .then(res => {
+      console.log(res)
+      return res
+    })
+    .catch(err => console.log('POST cards', err))
+  }
+
+  deleteCard(id) {
+    return fetch(`${this._url}cards/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+    .then(res => this._check(res))
     .catch(err => console.log('POST cards', err))
   }
 }

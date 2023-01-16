@@ -1,11 +1,16 @@
+import {popupDeleteButton} from '../utils/constants.js'
+
 export default class Card {
 
-  constructor(card, template, popupImage, popupDelete) {
+  constructor(card, template, popupImage, popupDelete, owner, deleteCardServer) {
     this._cardDetails = card;
     this._templateId = template;
     this._popupImage = popupImage;
-    this._numberOfLikes = card.likes.length
     this._popupDelete = popupDelete;
+    this._userOwner = owner;
+    this._cardOwner = card.owner._id
+    this._deleteCardServer = deleteCardServer;
+    this._deleteCard = this._deleteCard.bind(this);
   }
 
   _getTemplate = () => {
@@ -23,6 +28,7 @@ export default class Card {
     this._elementImage.addEventListener('click', this._openModalImageHandler);
     this._elementTrash.addEventListener('click', () => {
       this._popupDelete.open();
+      popupDeleteButton.addEventListener('click', this._deleteCard)
     });
   }
 
@@ -46,6 +52,22 @@ export default class Card {
     elementLink.alt = this._cardDetails.name;
   }
 
+  _checkTrash() {
+    if (this._cardOwner !== this._userOwner) {
+      this._elementTrash.remove();
+    }
+  }
+
+  _deleteCard() {
+    popupDeleteButton.removeEventListener('click', this._deleteCard)
+    
+    this._deleteCardServer(this._cardDetails._id)
+
+    this._removeCardHandler();
+
+    this._popupDelete.close();
+  }
+
   render() {
     this._element = this._getTemplate();
     this._elementLike = this._element.querySelector('.element__like');
@@ -53,7 +75,9 @@ export default class Card {
     this._elementImage = this._element.querySelector('.element__image');
     this._elementNumberLikes = this._element.querySelector('.element__likes-number');
 
-    this._elementNumberLikes.textContent = this._numberOfLikes;
+    this._checkTrash();
+
+    this._elementNumberLikes.textContent = this._cardDetails.likes.length;
 
     this._setEventListeners();
     this._addCardDetails();

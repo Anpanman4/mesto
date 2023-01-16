@@ -13,6 +13,14 @@ export default class UserInfo {
       .catch((err) => console.log(err));
   }
 
+  setUserOwner(owner) {
+    this._owner = owner;
+  }
+
+  getUserOwner() {
+    return this._owner;
+  }
+
   getUserInfo() {
     return {
       name: this._name.textContent,

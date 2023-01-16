@@ -35,12 +35,20 @@ popupImageClass.setEventListeners();
 
 
 // Popup: popup delete
-const popupDelete = new Popup('.popup_type_delete');
-popupDelete.setEventListeners();
+const popupDeleteClass = new Popup('.popup_type_delete');
+popupDeleteClass.setEventListeners();
+
+
+// ф-я удаляющая карточку с сервера
+const deleteCardServer = (id) => {
+  console.log('его', id)
+  api.deleteCard(id)
+}
+
 
 // ф-я создания карточки
-export const createCard = (item) => {
-  const cardElement = new Card(item, '#element-template', popupImageClass, popupDelete).render();
+const createCard = (item) => {
+  const cardElement = new Card(item, '#element-template', popupImageClass, popupDeleteClass, userInfo.getUserOwner(), deleteCardServer).render();
   return cardElement;
 }
 
@@ -89,6 +97,7 @@ popupEditButtonElement.addEventListener('click', () => {
 const popupAddClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
+
 // отправляем данные на создание карточки и отрисовываем ее
   const newCard = api.createNewCard(inputValue)
   newCard
@@ -113,6 +122,7 @@ profileAddButtonElement.addEventListener('click', () => {
 const userData = api.getUserValues()
 userData
   .then((data) => {
+    userInfo.setUserOwner(data._id)
     userInfo.setUserInfo(data)
     userInfo.setUserAvatar(data)
   })
