@@ -1,4 +1,5 @@
 .profile__avatar {
+  position: relative;
   object-fit: contain;
 	max-width: 120px;
 	max-height: 120px;
@@ -8,7 +9,15 @@
 
 .profile__avatar:hover {
   opacity: .2;
-	cursor: pointer;
+  cursor: pointer;
+}
+
+.profile__avatar:hover:before {
+  content: url("../../../images/pencil.svg");
+  z-index: 1;
+  position: absolute;
+  top: calc(50% - 13px);
+  left: calc(50% - 13px);
 }
 
 @media screen and (max-width: 700px) {
