@@ -42,20 +42,45 @@ popupImage.setEventListeners();
 
 
 // Popup: popup delete
-const popupDeleteClass = new Popup('.popup_type_delete');
-popupDeleteClass.setEventListeners();
+const popupConfirmation = new Popup('.popup_type_delete');
+popupConfirmation.setEventListeners();
 
 
 // ф-я удаляющая карточку с сервера
 const deleteCardServer = (id) => {
   api.deleteCard(id)
+    .then(res => {
+      popupConfirmation.close();
+
+      return res
+    })
     .catch(err => console.log('DELETE card', err))
+}
+
+
+// ф-я постановки лайка
+const addLike = (likeContainer, cardId) => {
+  api.doLike(cardId)
+  .then(res => {
+    likeContainer.textContent = res.likes.length;
+  })
+  .catch(err => console.log('POST delete like', err))
+}
+
+
+// ф-я удаления лайка
+const deleteLike = (likeContainer, cardId) => {
+  api.deleteLike(cardId)
+  .then(res => {
+    likeContainer.textContent = res.likes.length;
+  })
+  .catch(err => console.log('POST delete like', err))
 }
 
 
 // ф-я создания карточки
 const createCard = (item) => {
-  const cardElement = new Card(item, '#element-template', popupImage, popupDeleteClass, userInfo.getUserOwner(), deleteCardServer, api).render();
+  const cardElement = new Card(item, '#element-template', popupImage, popupConfirmation, userInfo.getUserOwner(), deleteCardServer, addLike, deleteLike, api).render();
   return cardElement;
 }
 

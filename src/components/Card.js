@@ -2,16 +2,17 @@ import {popupDeleteButton} from '../utils/constants.js'
 
 export default class Card {
 
-  constructor(card, template, popupImage, popupDelete, owner, deleteCardServer, api) {
+  constructor(card, template, popupImage, popupConfirmation, owner, deleteCardServer, addLike, deleteLike) {
     this._cardDetails = card;
     this._templateId = template;
     this._popupImage = popupImage;
-    this._popupDelete = popupDelete;
+    this._popupConfirmation = popupConfirmation;
     this._userOwner = owner;
     this._cardOwner = card.owner._id
     this._deleteCardServer = deleteCardServer;
     this._deleteCard = this._deleteCard.bind(this);
-    this._api = api;
+    this._addLike = addLike;
+    this._deleteLike = deleteLike;
   }
 
   _getTemplate = () => {
@@ -28,7 +29,7 @@ export default class Card {
     this._elementLike.addEventListener('click', this._toggleLikeHandler)
     this._elementImage.addEventListener('click', this._openModalImageHandler);
     this._elementTrash.addEventListener('click', () => {
-      this._popupDelete.open();
+      this._popupConfirmation.open();
       popupDeleteButton.addEventListener('click', this._deleteCard)
     });
   }
@@ -36,18 +37,10 @@ export default class Card {
   _toggleLikeHandler = () => {
     if (this._elementLike.classList.contains('element__like_active')) {
       this._elementLike.classList.remove('element__like_active');
-      this._api.deleteLike(this._cardDetails._id)
-        .then(res => {
-          this._elementNumberLikes.textContent = res.likes.length;
-        })
-        .catch(err => console.log('POST delete like', err))
+      this._deleteLike(this._elementNumberLikes, this._cardDetails._id)
     } else {
       this._elementLike.classList.add('element__like_active');
-      this._api.doLike(this._cardDetails._id)
-        .then(res => {
-          this._elementNumberLikes.textContent = res.likes.length;
-        })
-        .catch(err => console.log('POST do like', err))
+      this._addLike(this._elementNumberLikes, this._cardDetails._id)
     }
   }
 
@@ -88,9 +81,6 @@ export default class Card {
     this._deleteCardServer(this._cardDetails._id)
     
     this._removeCardHandler();
-
-    this._popupDelete.close();
-
   }
 
   _showCountLikes () {
