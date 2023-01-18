@@ -64,7 +64,7 @@ const createCard = (item) => {
 const cardSection = new Section({
   renderer: (item) => {
     const card = createCard(item);
-    cardSection.addItem(card);
+    cardSection.addItemLoading(card);
   }}, '.elements'
   , api);
 
