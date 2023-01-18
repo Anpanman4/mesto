@@ -82,15 +82,36 @@ avatarPopupValidator.enableValidation();
 const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar', api)
 
 
+const updateUserInfo = (body) => {
+  const response = api.updateUserValues(body)
+  response
+    .then(res => {
+      userInfo.setUserInfo(res)
+
+      popupEditProfile.close();
+    })
+    .catch((err) => console.log(err));
+}
+
+const updateUserAvatar = (body) => {
+  const response = api.updateUserAvatar(body)
+  response
+    .then(res => {
+      userInfo.setUserAvatar(res)
+    
+      popupAvatar.close();
+    })
+    .catch((err) => console.log(err));
+}
+
+
 // PopupEdit - код для работы Popup редактирования пользователя
 const popupEditProfile = new PopupWithForm({submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
   renderLoading(popupEditButton, 'Сохранение...');
 
-  userInfo.updateUserInfo(inputValue)
-
-  popupEditProfile.close();
+  updateUserInfo(inputValue)
 }}, '.popup_type_edit')
 
 popupEditProfile.setEventListeners();
@@ -138,11 +159,9 @@ profileAddButtonElement.addEventListener('click', () => {
 const popupAvatar = new PopupWithForm({ submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
-  userInfo.updateUserAvatar(inputValue);
-
   renderLoading(popupAvatarButton, 'Сохранение...');
 
-  popupAvatar.close();
+  updateUserAvatar(inputValue);
 }}, '.popup_type_avatar')
 popupAvatar.setEventListeners();
 

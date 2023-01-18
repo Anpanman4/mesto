@@ -1,9 +1,8 @@
 export default class UserInfo {
-  constructor(name, about, avatar, api) {
+  constructor(name, about, avatar) {
     this._name = document.querySelector(name);
     this._about = document.querySelector(about);
     this._avatar = document.querySelector(avatar);
-    this._api = api;
   }
 
   getUserInfo() {
@@ -23,13 +22,6 @@ export default class UserInfo {
     }
   }
 
-  updateUserInfo(body) {
-    const response = this._api.updateUserValues(body)
-    response
-      .then(res => this.setUserInfo(res))
-      .catch((err) => console.log(err));
-  }
-
   getUserOwner() {
     return this._owner;
   }
@@ -42,12 +34,5 @@ export default class UserInfo {
     if (data.avatar) {
       this._avatar.src = data.avatar;
     }
-  }
-
-  updateUserAvatar(body) {
-    const response = this._api.updateUserAvatar(body)
-    response
-      .then(res => this.setUserAvatar(res))
-      .catch((err) => console.log(err));
   }
 }
