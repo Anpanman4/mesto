@@ -1,7 +1,7 @@
 export const profileElement = document.querySelector('.profile');
 export const profileEditButtonElement = profileElement.querySelector('.profile__edit-button');
 export const profileAddButtonElement = profileElement.querySelector('.profile__add-button');
-export const profileAvatarButton = profileElement.querySelector('.profile__avatar');
+export const profileAvatarButton = profileElement.querySelector('.profile__avatar-cover');
 
 export const popupEditElement = document.querySelector('.popup_type_edit');
 export const popupEditForm = popupEditElement.querySelector('.popup__form');

@@ -3,8 +3,8 @@ import "./index.css";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import FormValidator from "../components/FormValidator.js";
-import Popup from "../components/Popup";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation ";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
@@ -37,12 +37,11 @@ const api = new Api({
 
 // код для работы Popup с Image
 const popupImage = new PopupWithImage('.popup_type_image');
-
 popupImage.setEventListeners();
 
 
 // Popup: popup delete
-const popupConfirmation = new Popup('.popup_type_delete');
+const popupConfirmation = new PopupWithConfirmation('.popup_type_delete');
 popupConfirmation.setEventListeners();
 
 
@@ -157,7 +156,7 @@ const popupAddCard = new PopupWithForm({submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
   renderLoading(popupAddButton, 'Сохранение...');
-// отправляем данные на создание карточки и отрисовываем ее
+
   const newCard = api.createNewCard(inputValue)
   newCard
     .then((data) => {
