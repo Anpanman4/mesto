@@ -49,7 +49,7 @@ popupDeleteClass.setEventListeners();
 // ф-я удаляющая карточку с сервера
 const deleteCardServer = (id) => {
   api.deleteCard(id)
-    .catch(err => console.log(err))
+    .catch(err => console.log('DELETE card', err))
 }
 
 
@@ -90,7 +90,7 @@ const updateUserInfo = (body) => {
 
       popupEditProfile.close();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log('PATCH User values', err));
 }
 
 const updateUserAvatar = (body) => {
@@ -101,7 +101,7 @@ const updateUserAvatar = (body) => {
     
       popupAvatar.close();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log('PATCH Avatar', err));
 }
 
 
@@ -141,6 +141,7 @@ const popupAddCard = new PopupWithForm({submitFunc: (evt, inputValue) => {
 
       popupAddCard.close();
     })
+    .catch(err => console.log('POST card', err))
 
 }}, '.popup_type_add')
 
@@ -182,7 +183,7 @@ userData
     userInfo.setUserInfo(data)
     userInfo.setUserAvatar(data)
   })
-  .catch(err => console.log(err))
+  .catch(err => console.log('GET user', err))
 
 // получаем карточки с сервера и отрисовываем их
 const initialCards = api.getInitialCards()
@@ -190,6 +191,6 @@ initialCards
   .then((cards) => {
     cardSection.renderItems(cards);
   })
-  .catch(err => console.log(err))
+  .catch(err => console.log('GET cards', err))
 
 

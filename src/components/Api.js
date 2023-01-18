@@ -17,7 +17,6 @@ export default class Api {
       headers: this._headers
     })
     .then(res => this._checkResponse(res))
-    .catch(err => console.log('GET user', err))
   }
 
   updateUserValues(body) {
@@ -27,7 +26,6 @@ export default class Api {
       body: JSON.stringify(body)
     })
     .then(res => this._checkResponse(res))
-    .catch(err => console.log('PATCH user', err))
   }
 
   updateUserAvatar(body) {
@@ -37,7 +35,6 @@ export default class Api {
       body: JSON.stringify(body)
     })
     .then(res => this._checkResponse(res))
-    .catch(err => console.log('PATCH avatar', err))
   }
 
   getInitialCards() {
@@ -45,7 +42,6 @@ export default class Api {
       headers: this._headers
     })
     .then(res => this._checkResponse(res))
-    .catch(err => console.log('GET cards', err))
   }
 
   createNewCard(body) {
@@ -55,7 +51,6 @@ export default class Api {
       body: JSON.stringify(body)
     })
     .then(res => this._checkResponse(res))
-    .catch(err => console.log('POST cards', err))
   }
 
   deleteCard(id) {
@@ -64,7 +59,6 @@ export default class Api {
       headers: this._headers,
     })
     .then(res => this._checkResponse(res))
-    .catch(err => console.log('DELETE card', err))
   }
 
   doLike(id) {
@@ -73,7 +67,6 @@ export default class Api {
       headers: this._headers,
     })
     .then(res => this._checkResponse(res))
-    .catch(err => console.log('POST do like', err))
   }
 
   deleteLike(id) {
@@ -82,6 +75,5 @@ export default class Api {
       headers: this._headers,
     })
     .then(res => this._checkResponse(res))
-    .catch(err => console.log('POST delete like', err))
   }
 }

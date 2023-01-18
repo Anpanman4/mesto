@@ -40,14 +40,14 @@ export default class Card {
         .then(res => {
           this._elementNumberLikes.textContent = res.likes.length;
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log('POST delete like', err))
     } else {
       this._elementLike.classList.add('element__like_active');
       this._api.doLike(this._cardDetails._id)
         .then(res => {
           this._elementNumberLikes.textContent = res.likes.length;
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log('POST do like', err))
     }
   }
 
