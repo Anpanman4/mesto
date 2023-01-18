@@ -4,7 +4,7 @@ export default class Api {
     this._headers = options.headers;
   }
 
-  _check(res) {
+  _checkResponse(res) {
     if (res.ok) {
       return res.json()
     }
@@ -16,7 +16,7 @@ export default class Api {
     return fetch(this._url + "users/me/", {
       headers: this._headers
     })
-    .then(res => this._check(res))
+    .then(res => this._checkResponse(res))
     .catch(err => console.log('GET user', err))
   }
 
@@ -26,7 +26,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(body)
     })
-    .then(res => this._check(res))
+    .then(res => this._checkResponse(res))
     .catch(err => console.log('PATCH user', err))
   }
 
@@ -36,7 +36,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(body)
     })
-    .then(res => this._check(res))
+    .then(res => this._checkResponse(res))
     .catch(err => console.log('PATCH avatar', err))
   }
 
@@ -44,7 +44,7 @@ export default class Api {
     return fetch(this._url + "cards/", {
       headers: this._headers
     })
-    .then(res => this._check(res))
+    .then(res => this._checkResponse(res))
     .catch(err => console.log('GET cards', err))
   }
 
@@ -54,7 +54,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(body)
     })
-    .then(res => this._check(res))
+    .then(res => this._checkResponse(res))
     .catch(err => console.log('POST cards', err))
   }
 
@@ -63,7 +63,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     })
-    .then(res => this._check(res))
+    .then(res => this._checkResponse(res))
     .catch(err => console.log('DELETE card', err))
   }
 
@@ -72,7 +72,7 @@ export default class Api {
       method: "PUT",
       headers: this._headers,
     })
-    .then(res => this._check(res))
+    .then(res => this._checkResponse(res))
     .catch(err => console.log('POST do like', err))
   }
 
@@ -81,7 +81,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     })
-    .then(res => this._check(res))
+    .then(res => this._checkResponse(res))
     .catch(err => console.log('POST delete like', err))
   }
 }

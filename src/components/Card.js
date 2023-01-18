@@ -86,10 +86,11 @@ export default class Card {
     popupDeleteButton.removeEventListener('click', this._deleteCard)
 
     this._deleteCardServer(this._cardDetails._id)
-
+    
     this._removeCardHandler();
 
     this._popupDelete.close();
+
   }
 
   _showCountLikes () {

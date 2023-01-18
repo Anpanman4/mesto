@@ -22,6 +22,8 @@ import {
   validationConfig
 } from '../utils/constants.js'
 
+import { renderLoading } from "../utils/utils";
+
 
 // код для работы с API
 const api = new Api({
@@ -34,9 +36,9 @@ const api = new Api({
 
 
 // код для работы Popup с Image
-const popupImageClass = new PopupWithImage('.popup_type_image');
+const popupImage = new PopupWithImage('.popup_type_image');
 
-popupImageClass.setEventListeners();
+popupImage.setEventListeners();
 
 
 // Popup: popup delete
@@ -47,12 +49,13 @@ popupDeleteClass.setEventListeners();
 // ф-я удаляющая карточку с сервера
 const deleteCardServer = (id) => {
   api.deleteCard(id)
+    .catch(err => console.log(err))
 }
 
 
 // ф-я создания карточки
 const createCard = (item) => {
-  const cardElement = new Card(item, '#element-template', popupImageClass, popupDeleteClass, userInfo.getUserOwner(), deleteCardServer, api).render();
+  const cardElement = new Card(item, '#element-template', popupImage, popupDeleteClass, userInfo.getUserOwner(), deleteCardServer, api).render();
   return cardElement;
 }
 
@@ -80,34 +83,34 @@ const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avat
 
 
 // PopupEdit - код для работы Popup редактирования пользователя
-const popupEditClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
+const popupEditProfile = new PopupWithForm({submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
-  popupEditButton.textContent = "Сохранение...";
+  renderLoading(popupEditButton, 'Сохранение...');
 
-  userInfo.updateUserInfo(inputValue);
+  userInfo.updateUserInfo(inputValue)
 
-  popupEditClass.close();
+  popupEditProfile.close();
 }}, '.popup_type_edit')
 
-popupEditClass.setEventListeners();
+popupEditProfile.setEventListeners();
 
 profileEditButtonElement.addEventListener('click', () => {
-  popupEditClass.setInputValues(userInfo.getUserInfo());
+  popupEditProfile.setInputValues(userInfo.getUserInfo());
 
   editPopupValidator.resetValidation();
 
-  popupEditButton.textContent = "Сохранить";
+  renderLoading(popupEditButton, 'Сохранить');
 
-  popupEditClass.open();
+  popupEditProfile.open();
 });
 
 
 // PopupAdd - код для работы Popup добавления карточки
-const popupAddClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
+const popupAddCard = new PopupWithForm({submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
-  popupAddButton.textContent = "Сохранение...";
+  renderLoading(popupAddButton, 'Сохранение...');
 // отправляем данные на создание карточки и отрисовываем ее
   const newCard = api.createNewCard(inputValue)
   newCard
@@ -115,40 +118,40 @@ const popupAddClass = new PopupWithForm({submitFunc: (evt, inputValue) => {
       const card = createCard(data);
       cardSection.addItem(card);
 
-      popupAddClass.close();
+      popupAddCard.close();
     })
 
 }}, '.popup_type_add')
 
-popupAddClass.setEventListeners();
+popupAddCard.setEventListeners();
 
 profileAddButtonElement.addEventListener('click', () => {
   addPopupValidator.resetValidation();
 
-  popupAddButton.textContent = "Создать";
+  renderLoading(popupAddButton, 'Создать');
 
-  popupAddClass.open();
+  popupAddCard.open();
 })
 
 
 // код создания Popup avatar
-const popupAvatarClass = new PopupWithForm({ submitFunc: (evt, inputValue) => {
+const popupAvatar = new PopupWithForm({ submitFunc: (evt, inputValue) => {
   evt.preventDefault();
 
   userInfo.updateUserAvatar(inputValue);
 
-  popupAvatarButton.textContent = "Сохранение...";
+  renderLoading(popupAvatarButton, 'Сохранение...');
 
-  popupAvatarClass.close();
+  popupAvatar.close();
 }}, '.popup_type_avatar')
-popupAvatarClass.setEventListeners();
+popupAvatar.setEventListeners();
 
 profileAvatarButton.addEventListener('click', () => {
   avatarPopupValidator.resetValidation();
 
-  popupAvatarButton.textContent = "Сохранить";
+  renderLoading(popupAvatarButton, 'Сохранить');
 
-  popupAvatarClass.open();
+  popupAvatar.open();
 })
 
 
@@ -166,7 +169,7 @@ userData
 const initialCards = api.getInitialCards()
 initialCards
   .then((cards) => {
-    cardSection.renderer(cards);
+    cardSection.renderItems(cards);
   })
   .catch(err => console.log(err))
 

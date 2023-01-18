@@ -14,9 +14,13 @@ export default class UserInfo {
   }
 
   setUserInfo(inputValue) {
-    this._name.textContent = inputValue.name;
-    this._about.textContent = inputValue.about;
-    this._avatar.alt = inputValue.name;
+    if (inputValue.name) {
+      this._name.textContent = inputValue.name;
+      this._avatar.alt = inputValue.name;
+    }
+    if (inputValue.about) {
+      this._about.textContent = inputValue.about;
+    }
   }
 
   updateUserInfo(body) {
@@ -35,7 +39,9 @@ export default class UserInfo {
   }
 
   setUserAvatar(data) {
-    this._avatar.src = data.avatar;
+    if (data.avatar) {
+      this._avatar.src = data.avatar;
+    }
   }
 
   updateUserAvatar(body) {
