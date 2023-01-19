@@ -46,12 +46,14 @@ popupConfirmation.setEventListeners();
 
 
 // ф-я удаляющая карточку с сервера
-const deleteCardServer = (id) => {
+const deleteCardServer = (id, removeCardHandler) => {
   api.deleteCard(id)
     .then(res => {
       popupConfirmation.close();
 
-      return res
+      removeCardHandler();
+
+      return res;
     })
     .catch(err => console.log('DELETE card', err))
 }
@@ -79,7 +81,7 @@ const deleteLike = (likeContainer, cardId) => {
 
 // ф-я создания карточки
 const createCard = (item) => {
-  const cardElement = new Card(item, '#element-template', popupImage, popupConfirmation, userInfo.getUserOwner(), deleteCardServer, addLike, deleteLike, api).render();
+  const cardElement = new Card(item, '#element-template', popupImage, popupConfirmation, userInfo.getUserOwner(), deleteCardServer, addLike, deleteLike).render();
   return cardElement;
 }
 
@@ -88,9 +90,8 @@ const createCard = (item) => {
 const cardSection = new Section({
   renderer: (item) => {
     const card = createCard(item);
-    cardSection.addItemLoading(card);
-  }}, '.elements'
-  , api);
+    cardSection.prependItem(card);
+  }}, '.elements');
 
 
 // код для работы валидации
@@ -103,7 +104,7 @@ avatarPopupValidator.enableValidation();
 
 
 // UserInfo - код для управления информации о пользователе
-const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar', api)
+const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar')
 
 
 const updateUserInfo = (body) => {
@@ -161,7 +162,7 @@ const popupAddCard = new PopupWithForm({submitFunc: (evt, inputValue) => {
   newCard
     .then((data) => {
       const card = createCard(data);
-      cardSection.addItem(card);
+      cardSection.appendItem(card);
 
       popupAddCard.close();
     })
@@ -199,22 +200,19 @@ profileAvatarButton.addEventListener('click', () => {
 })
 
 
-// получаем данные о пользователе с сервера и вставляем их
-const userData = api.getUserValues()
-userData
-  .then((data) => {
-    userInfo.setUserOwner(data._id)
-    userInfo.setUserInfo(data)
-    userInfo.setUserAvatar(data)
+// получаем все данные с API и передаем их
+const startPage = () => {
+  api.getAllPromise()
+  .then(argument => {
+    const [ userData, initialCards ] = argument
+
+    userInfo.setUserOwner(userData._id);
+    userInfo.setUserInfo(userData);
+    userInfo.setUserAvatar(userData);
+
+    cardSection.renderItems(initialCards);
   })
-  .catch(err => console.log('GET user', err))
+  .catch(err => console.log('loading err', err))
+}
 
-// получаем карточки с сервера и отрисовываем их
-const initialCards = api.getInitialCards()
-initialCards
-  .then((cards) => {
-    cardSection.renderItems(cards);
-  })
-  .catch(err => console.log('GET cards', err))
-
-
+startPage()

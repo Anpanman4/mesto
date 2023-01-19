@@ -76,4 +76,8 @@ export default class Api {
     })
     .then(res => this._checkResponse(res))
   }
+
+  getAllPromise () {
+    return Promise.all([this.getUserValues(), this.getInitialCards()]);
+  }
 }

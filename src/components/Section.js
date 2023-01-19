@@ -4,11 +4,11 @@ export default class Section {
     this._container = document.querySelector(itemSelector);
   }
 
-  addItemLoading(element) {
+  appendItem(element) {
     this._container.append(element)
   }
 
-  addItem(element) {
+  prependItem(element) {
     this._container.prepend(element)
   }
 
