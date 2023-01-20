@@ -1,5 +1,3 @@
-import {popupDeleteButton} from '../utils/constants.js'
-
 export default class Card {
 
   constructor(card, template, popupImage, popupConfirmation, owner, deleteCardServer, addLike, deleteLike) {
@@ -29,8 +27,8 @@ export default class Card {
     this._elementLike.addEventListener('click', this._toggleLikeHandler)
     this._elementImage.addEventListener('click', this._openModalImageHandler);
     this._elementTrash.addEventListener('click', () => {
-      this._popupConfirmation.open();
-      popupDeleteButton.addEventListener('click', this._deleteCard)
+      this._popupConfirmation.open(this._deleteCard);
+      // popupDeleteButton.addEventListener('click', this._deleteCard)
     });
   }
 
@@ -76,7 +74,7 @@ export default class Card {
   }
 
   _deleteCard() {
-    popupDeleteButton.removeEventListener('click', this._deleteCard)
+    // popupDeleteButton.removeEventListener('click', this._deleteCard)
 
     this._deleteCardServer(this._cardDetails._id, this._removeCardHandler)
   }
