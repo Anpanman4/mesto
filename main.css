@@ -18,7 +18,7 @@
 .element__image{background-color:#000;color:#fff;cursor:pointer;max-height:282px;max-width:282px;min-height:282px}
 .element__container{align-items:center;box-sizing:border-box;display:flex;justify-content:space-between;margin:25px 20px 0 21px;padding-bottom:25px}
 .element__like-container{align-items:center;display:flex;flex-direction:column}
-.element__like{background-image:url(c783fa7a0eb2e210dd2d.svg);background-repeat:no-repeat;border:0;cursor:pointer;height:19px;width:22px}.element__like:hover{opacity:.5}
+.element__like{background-color:#fff;background-image:url(c783fa7a0eb2e210dd2d.svg);background-repeat:no-repeat;border:0;cursor:pointer;height:19px;width:22px}.element__like:hover{opacity:.5}
 .element__likes-number{font-size:13px;font-style:normal;font-weight:400;line-height:1.25;margin:3px 0 0;padding:0}
 .element__like_active{background-image:url(7d1e86040318b9040bd1.svg);background-position:50%;background-repeat:no-repeat;border:0;cursor:pointer;height:19px;width:22px}
 .element__place{font-size:24px;font-style:normal;font-weight:900;line-height:1.2;margin:0;max-width:219px;overflow:hidden;padding:0;text-overflow:ellipsis;white-space:nowrap}
